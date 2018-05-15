@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg width="63px" height="92px" viewBox="0 0 63 92" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:sketch="http://www.bohemiancoding.com/sketch/ns">
+    <!-- Generator: Sketch 3.3.3 (12081) - http://www.bohemiancoding.com/sketch -->
+    <title>map-pin-nav-finish</title>
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="50.0000023%" y1="2.4603606e-07%" x2="50.0000023%" y2="100.000003%" id="linearGradient-1">
+            <stop stop-color="#9AC44D" offset="0%"></stop>
+            <stop stop-color="#409043" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" sketch:type="MSPage">
+        <g id="map-pin-nav-finish" sketch:type="MSLayerGroup">
+            <g id="Page-1" sketch:type="MSShapeGroup">
+                <g id="map-pin-nav-finish">
+                    <path d="M62.922947,31.1490547 C62.922947,14.3145592 48.9095822,0.667533824 31.6233559,0.667533824 C14.3370481,0.667533824 0.32376195,14.3145592 0.32376195,31.1490547 C0.32376195,47.2517008 31.7178183,91.8697112 31.7178183,91.8697112 C31.7178183,91.8697112 62.922947,47.1796272 62.922947,31.1490547 L62.922947,31.1490547 L62.922947,31.1490547 Z" id="Shape" fill="url(#linearGradient-1)"></path>
+                    <ellipse id="Oval" fill="#3F7C3D" cx="32.0516024" cy="30.1295815" rx="23.4703016" ry="22.8568829"></ellipse>
+                    <g id="Group" transform="translate(20.250000, 16.455285)" fill="#FFFFFF">
+                        <path d="M17.2413826,9.68448172 C17.2413826,8.28934705 22.8882894,3.48467091 22.8882894,3.48467091 C19.9872722,4.82761929 15.7389249,4.41452007 12.0086975,2.3993885 C8.27886765,0.384585057 5.01486105,0.642613343 5.01486105,0.642613343 L5.01486105,12.8576541 C5.205594,12.7604033 6.01873395,12.4711559 8.64149085,12.7327465 C11.7496376,13.0429254 19.6762475,15.6258648 22.4221028,14.9544077 C22.4221029,14.9544077 17.2413826,10.5674859 17.2413826,9.68448172 L17.2413826,9.68448172 L17.2413826,9.68448172 Z" id="Shape"></path>
+                        <rect id="Rectangle-path" x="0.714916725" y="0.642613343" width="2.2796658" height="26.0740155"></rect>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

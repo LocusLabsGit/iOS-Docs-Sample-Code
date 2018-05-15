@@ -1,0 +1,346 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		4CA5845E1C1FDCE80065E872 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4CA5845D1C1FDCE80065E872 /* SystemConfiguration.framework */; };
+		8371767F1B4DE0E3001C4FD5 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8371767E1B4DE0E3001C4FD5 /* main.m */; };
+		837176821B4DE0E3001C4FD5 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 837176811B4DE0E3001C4FD5 /* AppDelegate.m */; };
+		837176851B4DE0E3001C4FD5 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 837176841B4DE0E3001C4FD5 /* ViewController.m */; };
+		837176881B4DE0E3001C4FD5 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 837176861B4DE0E3001C4FD5 /* Main.storyboard */; };
+		8371768A1B4DE0E3001C4FD5 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 837176891B4DE0E3001C4FD5 /* Images.xcassets */; };
+		8371768D1B4DE0E3001C4FD5 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8371768B1B4DE0E3001C4FD5 /* LaunchScreen.xib */; };
+		837176A31B4DE107001C4FD5 /* LocusLabsSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 837176A21B4DE107001C4FD5 /* LocusLabsSDK.framework */; };
+		839BF91D1B4EB60F00A0BCDE /* LocusLabsMapLoader.m in Sources */ = {isa = PBXBuildFile; fileRef = 839BF91C1B4EB60F00A0BCDE /* LocusLabsMapLoader.m */; };
+		839BF9221B4EBE7700A0BCDE /* LocusLabsSDK.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 839BF9211B4EBE7700A0BCDE /* LocusLabsSDK.bundle */; };
+		ECA67DFA1F578ACD001A8A21 /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ECA67DF91F578ACD001A8A21 /* WebKit.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		4CA5845D1C1FDCE80065E872 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		837176791B4DE0E3001C4FD5 /* FlightCard.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FlightCard.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8371767D1B4DE0E3001C4FD5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		8371767E1B4DE0E3001C4FD5 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		837176801B4DE0E3001C4FD5 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		837176811B4DE0E3001C4FD5 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		837176831B4DE0E3001C4FD5 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		837176841B4DE0E3001C4FD5 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		837176871B4DE0E3001C4FD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		837176891B4DE0E3001C4FD5 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8371768C1B4DE0E3001C4FD5 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		837176A21B4DE107001C4FD5 /* LocusLabsSDK.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LocusLabsSDK.framework; path = ../../LocusLabsSDK.framework; sourceTree = "<group>"; };
+		839BF91B1B4EB60F00A0BCDE /* LocusLabsMapLoader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LocusLabsMapLoader.h; sourceTree = "<group>"; };
+		839BF91C1B4EB60F00A0BCDE /* LocusLabsMapLoader.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LocusLabsMapLoader.m; sourceTree = "<group>"; };
+		839BF9211B4EBE7700A0BCDE /* LocusLabsSDK.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = LocusLabsSDK.bundle; path = ../../LocusLabsSDK.bundle; sourceTree = "<group>"; };
+		ECA67DF91F578ACD001A8A21 /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		837176761B4DE0E3001C4FD5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ECA67DFA1F578ACD001A8A21 /* WebKit.framework in Frameworks */,
+				4CA5845E1C1FDCE80065E872 /* SystemConfiguration.framework in Frameworks */,
+				837176A31B4DE107001C4FD5 /* LocusLabsSDK.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		837176701B4DE0E3001C4FD5 = {
+			isa = PBXGroup;
+			children = (
+				8371767B1B4DE0E3001C4FD5 /* FlightCard */,
+				8371767A1B4DE0E3001C4FD5 /* Products */,
+				F94589CDB15EB63B51A4E04C /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		8371767A1B4DE0E3001C4FD5 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				837176791B4DE0E3001C4FD5 /* FlightCard.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8371767B1B4DE0E3001C4FD5 /* FlightCard */ = {
+			isa = PBXGroup;
+			children = (
+				837176801B4DE0E3001C4FD5 /* AppDelegate.h */,
+				837176811B4DE0E3001C4FD5 /* AppDelegate.m */,
+				837176831B4DE0E3001C4FD5 /* ViewController.h */,
+				837176841B4DE0E3001C4FD5 /* ViewController.m */,
+				839BF91B1B4EB60F00A0BCDE /* LocusLabsMapLoader.h */,
+				839BF91C1B4EB60F00A0BCDE /* LocusLabsMapLoader.m */,
+				837176861B4DE0E3001C4FD5 /* Main.storyboard */,
+				837176891B4DE0E3001C4FD5 /* Images.xcassets */,
+				8371768B1B4DE0E3001C4FD5 /* LaunchScreen.xib */,
+				8371767C1B4DE0E3001C4FD5 /* Supporting Files */,
+			);
+			path = FlightCard;
+			sourceTree = "<group>";
+		};
+		8371767C1B4DE0E3001C4FD5 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8371767D1B4DE0E3001C4FD5 /* Info.plist */,
+				8371767E1B4DE0E3001C4FD5 /* main.m */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F94589CDB15EB63B51A4E04C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				ECA67DF91F578ACD001A8A21 /* WebKit.framework */,
+				839BF9211B4EBE7700A0BCDE /* LocusLabsSDK.bundle */,
+				837176A21B4DE107001C4FD5 /* LocusLabsSDK.framework */,
+				4CA5845D1C1FDCE80065E872 /* SystemConfiguration.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		837176781B4DE0E3001C4FD5 /* FlightCard */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8371769C1B4DE0E3001C4FD5 /* Build configuration list for PBXNativeTarget "FlightCard" */;
+			buildPhases = (
+				837176751B4DE0E3001C4FD5 /* Sources */,
+				837176761B4DE0E3001C4FD5 /* Frameworks */,
+				837176771B4DE0E3001C4FD5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = FlightCard;
+			productName = FlightCard;
+			productReference = 837176791B4DE0E3001C4FD5 /* FlightCard.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		837176711B4DE0E3001C4FD5 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0640;
+				ORGANIZATIONNAME = LocusLabs;
+				TargetAttributes = {
+					837176781B4DE0E3001C4FD5 = {
+						CreatedOnToolsVersion = 6.4;
+					};
+				};
+			};
+			buildConfigurationList = 837176741B4DE0E3001C4FD5 /* Build configuration list for PBXProject "FlightCard" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 837176701B4DE0E3001C4FD5;
+			productRefGroup = 8371767A1B4DE0E3001C4FD5 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				837176781B4DE0E3001C4FD5 /* FlightCard */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		837176771B4DE0E3001C4FD5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				837176881B4DE0E3001C4FD5 /* Main.storyboard in Resources */,
+				8371768D1B4DE0E3001C4FD5 /* LaunchScreen.xib in Resources */,
+				839BF9221B4EBE7700A0BCDE /* LocusLabsSDK.bundle in Resources */,
+				8371768A1B4DE0E3001C4FD5 /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		837176751B4DE0E3001C4FD5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				839BF91D1B4EB60F00A0BCDE /* LocusLabsMapLoader.m in Sources */,
+				837176851B4DE0E3001C4FD5 /* ViewController.m in Sources */,
+				837176821B4DE0E3001C4FD5 /* AppDelegate.m in Sources */,
+				8371767F1B4DE0E3001C4FD5 /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		837176861B4DE0E3001C4FD5 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				837176871B4DE0E3001C4FD5 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		8371768B1B4DE0E3001C4FD5 /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8371768C1B4DE0E3001C4FD5 /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8371769A1B4DE0E3001C4FD5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		8371769B1B4DE0E3001C4FD5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.4;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		8371769D1B4DE0E3001C4FD5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_FRAMEWORK_BUILD_PATH\"",
+					../..,
+				);
+				INFOPLIST_FILE = FlightCard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = FlightCard;
+			};
+			name = Debug;
+		};
+		8371769E1B4DE0E3001C4FD5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$PODS_FRAMEWORK_BUILD_PATH\"",
+					../..,
+				);
+				INFOPLIST_FILE = FlightCard/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = FlightCard;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		837176741B4DE0E3001C4FD5 /* Build configuration list for PBXProject "FlightCard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8371769A1B4DE0E3001C4FD5 /* Debug */,
+				8371769B1B4DE0E3001C4FD5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8371769C1B4DE0E3001C4FD5 /* Build configuration list for PBXNativeTarget "FlightCard" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8371769D1B4DE0E3001C4FD5 /* Debug */,
+				8371769E1B4DE0E3001C4FD5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 837176711B4DE0E3001C4FD5 /* Project object */;
+}
