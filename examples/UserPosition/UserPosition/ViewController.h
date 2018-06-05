@@ -10,7 +10,7 @@
 
 #import <LocusLabsSDK/LocusLabsSDK.h>
 
-@interface ViewController : UIViewController <LLAirportDatabaseDelegate, LLFloorDelegate, LLPositionManagerDelegate>
+@interface ViewController : UIViewController <LLAirportDatabaseDelegate, LLFloorDelegate, LLMapViewDelegate, LLPositionManagerDelegate>
 
 
 @end

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelegate, LLNavigationDelegate {
+class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelegate, LLMapViewDelegate, LLNavigationDelegate {
 
     // Vars
     var airportDatabase:    LLAirportDatabase!
@@ -25,24 +25,35 @@ class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelega
         // Initialize the LocusLabs SDK with the accountId provided by LocusLabs
         LLLocusLabs.setup().accountId = "A11F4Y6SZRXH4X"
         
-        // Get an instance of the LLAirportDatabase and register as its delegate
+        // Get an instance of the LLAirportDatabase, register as its delegate and load the venue LAX
         airportDatabase = LLAirportDatabase()
         airportDatabase.delegate = self
         
-        // Request a list of airports - the "airportList" delegate method will be called when the list is ready
-        airportDatabase.listAirports()
+        // Create a new LLMapView, register as its delegate and add it as a subview
+        mapView = LLMapView()
+        mapView!.delegate = self
+        view.addSubview(mapView!)
+        
+        // Set the mapview's layout constraints
+        mapView!.translatesAutoresizingMaskIntoConstraints = false
+        mapView!.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        mapView!.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        mapView!.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        mapView!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        
+        airportDatabase.loadAirport("lax")
         
         navigation = LLNavigation.initTracking() as? LLNavigation
         navigation?.delegate = self
     }
 
     // MARK: Delegates - LLAirportDatabase
-    func airportDatabase(_ airportDatabase: LLAirportDatabase!, airportList: [Any]!) {
+    
+    func airportDatabase(_ airportDatabase: LLAirportDatabase!, airportLoadFailed venueId: String!, code errorCode: LLDownloaderError, message: String!) {
         
-        airportDatabase.loadAirport("lax")
+        // Handle failures here
     }
     
-    // Implement the airportLoaded delegate method
     func airportDatabase(_ airportDatabase: LLAirportDatabase!, airportLoaded airport: LLAirport!) {
         
         self.airport = airport
@@ -63,28 +74,28 @@ class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelega
             }
         }
     }
-
+    
     // MARK: Delegates - LLFloor
+    
     func floor(_ floor: LLFloor!, mapLoaded map: LLMap!) {
         
-        // Create a new LLMapView, set its map and add it as a subview
-        mapView = LLMapView()
+        mapView?.map = map
+    }
+    
+    // MARK: Delegates - LLMapView
+    
+    func mapViewDidClickBack(_ mapView: LLMapView!) {
         
-        if mapView != nil {
-            
-            mapView!.map = map
-            view.addSubview(mapView!)
-            
-            // Set the mapview's layout constraints
-            mapView!.translatesAutoresizingMaskIntoConstraints = false
-            mapView!.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-            mapView!.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
-            mapView!.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-            mapView!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        }
+        // The user tapped the "Cancel" button while the map was loading. Dismiss the app or take other appropriate action here
+    }
+    
+    func mapViewReady(_ mapView: LLMapView!) {
+        
+        // The map is ready to be used in calls e.g. zooming, showing poi, etc.
     }
     
     // MARK: Delegates - LLNavigation
+    
     func navigationStarted(_ startPoint: LLPosition!, endPoint: LLPosition!) {
         
         print("Start point ", startPoint.name)

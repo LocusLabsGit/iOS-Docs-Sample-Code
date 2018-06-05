@@ -1,20 +1,21 @@
 //
 //  ViewController.swift
-//  CenterAndZoomMapSwift
+//  ShowFullScreenMapSwift
 //
-//  Created by Juan Kruger on 01/02/18.
+//  Created by Juan Kruger on 31/01/18.
 //  Copyright © 2018 LocusLabs. All rights reserved.
 //
 
 import UIKit
 
-class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelegate, LLMapViewDelegate {
-    
+class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelegate, LLMapViewDelegate, LLPositionManagerDelegate {
+
     // Vars
-    var airportDatabase: LLAirportDatabase!
-    var airport: LLAirport?
-    var floor: LLFloor?
-    var mapView: LLMapView?
+    var airportDatabase:    LLAirportDatabase!
+    var airport:            LLAirport?
+    var floor:              LLFloor?
+    var mapView:            LLMapView?
+    var positionManager:    LLPositionManager?
     
     // MARK: Lifecycle
     
@@ -42,6 +43,17 @@ class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelega
         mapView!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         
         airportDatabase.loadAirport("lax")
+    }
+    
+    // MARK: Custom
+    
+    func startTrackingUserPosition() {
+        
+        positionManager = LLPositionManager(airports: [airport as Any])
+        positionManager?.delegate = self
+        
+        // Start with passive positioning to conserve battery
+        positionManager?.passivePositioning = true;
     }
     
     // MARK: Delegates - LLAirportDatabase
@@ -77,6 +89,7 @@ class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelega
     func floor(_ floor: LLFloor!, mapLoaded map: LLMap!) {
         
         mapView?.map = map
+        startTrackingUserPosition()
     }
     
     // MARK: Delegates - LLMapView
@@ -88,12 +101,36 @@ class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelega
     
     func mapViewReady(_ mapView: LLMapView!) {
         
-        // Set the floor
-        mapView.levelSelected("lax-default-Departures")
+        // The map is ready to be used in calls e.g. zooming, showing poi, etc.
+    }
+    
+    // MARK: Delegates LL PositionManager
+    func positionManager(_ positionManager: LLPositionManager!, positioningAvailable: Bool) {
         
-        // Center & zoom the map
-        mapView.mapCenter = LLLatLng(lat: 33.941384, lng: -118.402057)
-        mapView.mapRadius = 190.0
+        if positioningAvailable {
+            
+            print("Positioning available")
+        }
+        else {
+            
+            print("Positioning not available - determine if bluetooth is active and prompt user if not.")
+        }
+    }
+    
+    func positionManager(_ positionManager: LLPositionManager!, positionChanged position: LLPosition!) {
+        
+        if position == nil {
+            
+            print("Unable to locate user")
+            return
+        }
+        
+        // If we're near a venue, start active positioning (more battery intensive but provides accurate tracking)
+        if position.venueId != nil {
+            
+            positionManager.activePositioning = true
+            print("Near venueId: %@", position.venueId)
+        }
     }
 }
 

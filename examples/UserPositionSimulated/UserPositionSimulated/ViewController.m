@@ -24,6 +24,8 @@
     BOOL initialZoomDone;
 }
 
+#pragma mark Lifecycle
+
 - (void)viewDidLoad {
     
     [super viewDidLoad];
@@ -35,8 +37,21 @@
     self.airportDatabase = [LLAirportDatabase airportDatabase];
     self.airportDatabase.delegate = self;
     
-    // Request a list of airports - the "airportList" delegate method will be called when the list is ready
-    [self.airportDatabase listAirports];
+    // Create a new LLMapView, register as its delegate and add it as a subview
+    LLMapView *mapView = [[LLMapView alloc] init];
+    self.mapView = mapView;
+    self.mapView.delegate = self;
+    [self.view addSubview:mapView];
+    
+    // Set the mapview's layout constraints
+    mapView.translatesAutoresizingMaskIntoConstraints = NO;
+    [mapView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
+    [mapView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = YES;
+    [mapView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
+    [mapView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
+    
+    // Load the venue LAX
+    [self.airportDatabase loadAirport:@"lax"];
 }
 
 #pragma mark Custom
@@ -70,9 +85,9 @@
 
 #pragma mark Delegates - LLAirportDatabase
 
-- (void)airportDatabase:(LLAirportDatabase *)airportDatabase airportList:(NSArray *)airportList {
+- (void)airportDatabase:(LLAirportDatabase *)airportDatabase airportLoadFailed:(NSString *)venueId code:(LLDownloaderError)errorCode message:(NSString *)message {
     
-    [self.airportDatabase loadAirport:@"lax"];
+    // Handle failures here
 }
 
 - (void)airportDatabase:(LLAirportDatabase *)airportDatabase airportLoaded:(LLAirport *)airport {
@@ -90,30 +105,15 @@
     // Set the floor delegate and load its map - mapLoaded is called when loading is complete
     self.floor.delegate = self;
     [self.floor loadMap];
-    
-    // Initialize the location manager
-    [self startTrackingUserPosition];
 }
 
 #pragma mark Delegates - LLFloor
 
+
 - (void)floor:(LLFloor *)floor mapLoaded:(LLMap *)map {
     
-    // Create a new LLMapView, set its map and add it as a subview
-    LLMapView *mapView = [[LLMapView alloc] init];
-    self.mapView = mapView;
     self.mapView.map = map;
-    [self.view addSubview:mapView];
-    
-    self.mapView.delegate = self;
     self.mapView.positioningEnabled = YES;
-    
-    // Set the mapview's layout constraints
-    mapView.translatesAutoresizingMaskIntoConstraints = NO;
-    [mapView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
-    [mapView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = YES;
-    [mapView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
-    [mapView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
 }
 
 #pragma mark Delegates - LLMapView

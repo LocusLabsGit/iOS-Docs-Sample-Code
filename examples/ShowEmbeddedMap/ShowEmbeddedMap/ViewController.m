@@ -22,9 +22,8 @@
 #pragma mark Lifecycle
 
 - (void)viewDidLoad {
-
+    
     [super viewDidLoad];
-    self.view.backgroundColor = [UIColor colorWithWhite:0.90 alpha:1.0];
     
     // Initialize the LocusLabs SDK with the accountId provided by LocusLabs
     [LLLocusLabs setup].accountId = @"A11F4Y6SZRXH4X";
@@ -33,15 +32,32 @@
     self.airportDatabase = [LLAirportDatabase airportDatabase];
     self.airportDatabase.delegate = self;
     
-    // Request a list of airports - the "airportList" delegate method will be called when the list is ready
-    [self.airportDatabase listAirports];
+    // Create a new LLMapView, register as its delegate and add it as a subview
+    LLMapView *mapView = [[LLMapView alloc] init];
+    self.mapView = mapView;
+    self.mapView.delegate = self;
+    [self.view addSubview:mapView];
+    
+    // Set the mapview's layout constraints
+    mapView.translatesAutoresizingMaskIntoConstraints = NO;
+    [mapView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
+    [mapView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = YES;
+    [mapView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
+    [mapView.heightAnchor constraintEqualToConstant:220].active = YES;
+    
+    // Hide selected UI elements - these are likely not required when embedding
+    mapView.searchBarHidden = YES;
+    mapView.bottomBarHidden = YES;
+    
+    // Load the venue LAX
+    [self.airportDatabase loadAirport:@"lax"];
 }
 
 #pragma mark Delegates - LLAirportDatabase
 
-- (void)airportDatabase:(LLAirportDatabase *)airportDatabase airportList:(NSArray *)airportList {
+- (void)airportDatabase:(LLAirportDatabase *)airportDatabase airportLoadFailed:(NSString *)venueId code:(LLDownloaderError)errorCode message:(NSString *)message {
     
-    [self.airportDatabase loadAirport:@"lax"];
+    // Handle failures here
 }
 
 - (void)airportDatabase:(LLAirportDatabase *)airportDatabase airportLoaded:(LLAirport *)airport {
@@ -65,33 +81,19 @@
 
 - (void)floor:(LLFloor *)floor mapLoaded:(LLMap *)map {
     
-    // Create a new LLMapView, set its map and add it as a subview
-    LLMapView *mapView = [[LLMapView alloc] init];
-    self.mapView = mapView;
     self.mapView.map = map;
-    [self.view addSubview:mapView];
-    
-    // Set the mapView's delegate - this will enable us to hide the 2 Recommended Places buttons (bottom right corner of the map)
-    self.mapView.delegate = self;
-    
-    // Set the mapview's layout constraints
-    mapView.translatesAutoresizingMaskIntoConstraints = NO;
-    [mapView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
-    [mapView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = YES;
-    [mapView.topAnchor constraintEqualToAnchor:self.view.topAnchor constant:100].active = YES;
-    [mapView.heightAnchor constraintEqualToConstant:220].active = YES;
-    
-    // Hide selected UI elements - these are likely not required when embedding
-    mapView.searchBarHidden = YES;
-    mapView.bottomBarHidden = YES;
 }
 
 #pragma mark Delegates - LLMapView
 
-- (NSArray *)mapView:(LLMapView *)mapView willPresentPlaces:(NSArray *)places {
+- (void)mapViewDidClickBack:(LLMapView *)mapView {
     
-    // Return an empty array to hide all Recommended Places buttons (bottom right corner of the map)
-    return @[];
+    // The user tapped the "Cancel" button while the map was loading. Dismiss the app or take other appropriate action here
+}
+
+- (void)mapViewReady:(LLMapView *)mapView {
+    
+    // The map is ready to be used in calls e.g. zooming, showing poi, etc.
 }
 
 @end
