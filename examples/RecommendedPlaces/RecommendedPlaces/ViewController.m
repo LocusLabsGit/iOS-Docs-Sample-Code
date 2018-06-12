@@ -25,22 +25,30 @@
     
     [super viewDidLoad];
     
-    // Initialize the LocusLabs SDK with the accountId provided by LocusLabs.
+    // Initialize the LocusLabs SDK with the accountId provided by LocusLabs
     [LLLocusLabs setup].accountId = @"A11F4Y6SZRXH4X";
     
-    // Create a new LLAirportDatabase object: our top-level entry point into the LocusLabs SDK functionality.
-    self.airportDatabase = [LLAirportDatabase airportDatabase];
+    [LLConfiguration sharedConfiguration].recommendedPlacesEnabled = YES;
     
-    // Set its delegate: asynchronous calls to LLAirportDatabase are fielded by delegate methods.
+    // Get an instance of the LLAirportDatabase and register as its delegate
+    self.airportDatabase = [LLAirportDatabase airportDatabase];
     self.airportDatabase.delegate = self;
     
-    // Initiate a request for the list of airports (to be processed later by LLAirportDatabaseDelegate.airportList)
-    [self.airportDatabase listAirports];
-}
-
-- (void)didReceiveMemoryWarning {
-   
-    [super didReceiveMemoryWarning];
+    // Create a new LLMapView, register as its delegate and add it as a subview
+    LLMapView *mapView = [[LLMapView alloc] init];
+    self.mapView = mapView;
+    self.mapView.delegate = self;
+    [self.view addSubview:mapView];
+    
+    // Set the mapview's layout constraints
+    mapView.translatesAutoresizingMaskIntoConstraints = NO;
+    [mapView.leftAnchor constraintEqualToAnchor:self.view.leftAnchor].active = YES;
+    [mapView.rightAnchor constraintEqualToAnchor:self.view.rightAnchor].active = YES;
+    [mapView.topAnchor constraintEqualToAnchor:self.view.topAnchor].active = YES;
+    [mapView.bottomAnchor constraintEqualToAnchor:self.view.bottomAnchor].active = YES;
+    
+    // Load the venue LAX
+    [self.airportDatabase loadAirport:@"lax"];
 }
 
 #pragma mark Custom
@@ -75,10 +83,9 @@
 
 #pragma mark Delegates - LLAirportDatabase
 
-- (void)airportDatabase:(LLAirportDatabase *)airportDatabase airportList:(NSArray *)airportList {
+- (void)airportDatabase:(LLAirportDatabase *)airportDatabase airportLoadFailed:(NSString *)venueId code:(LLDownloaderError)errorCode message:(NSString *)message {
     
-    [LLConfiguration sharedConfiguration].recommendedPlacesEnabled = YES;
-    [self.airportDatabase loadAirport:@"lax"];
+    // Handle failures here
 }
 
 - (void)airportDatabase:(LLAirportDatabase *)airportDatabase airportLoaded:(LLAirport *)airport {
@@ -105,24 +112,20 @@
 
 - (void)floor:(LLFloor *)floor mapLoaded:(LLMap *)map {
     
-    // Create and initialize a new LLMapView and set its map and delegate
-    LLMapView *mapView = [[LLMapView alloc] init];
-    self.mapView = mapView;
-    mapView.map = map;
-    
-    // Register for mapView delegate calls
-    self.mapView.delegate = self;
-    
-    [self.view addSubview:mapView];
-    
-    // "constrain" the mapView to fill the entire screen
-    [mapView setTranslatesAutoresizingMaskIntoConstraints:NO];
-    NSDictionary *views = NSDictionaryOfVariableBindings(mapView);
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"H:|[mapView]|" options:0 metrics:nil views:views]];
-    [self.view addConstraints:[NSLayoutConstraint constraintsWithVisualFormat:@"V:|[mapView]|" options:0 metrics:nil views:views]];
+    self.mapView.map = map;
 }
 
 #pragma mark Delegates - LLMapView
+
+- (void)mapViewDidClickBack:(LLMapView *)mapView {
+    
+    // The user tapped the "Cancel" button while the map was loading. Dismiss the app or take other appropriate action here
+}
+
+- (void)mapViewReady:(LLMapView *)mapView {
+    
+    // The map is ready to be used in calls e.g. zooming, showing poi, etc.
+}
 
 - (NSArray *)mapView:(LLMapView *)mapView willPresentPlaces:(NSArray *)places {
 
@@ -146,7 +149,6 @@
 
 - (BOOL)mapView:(LLMapView *)mapView didTapPOI:(NSString *)poiId {
 
-    NSLog(@"ccc:%@", poiId);
     return YES;
 }
 

@@ -18,6 +18,7 @@ class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelega
     var navPoint:           LLNavPoint?
     
     // MARK: Lifecycle
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
@@ -29,8 +30,19 @@ class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelega
         airportDatabase = LLAirportDatabase()
         airportDatabase.delegate = self
         
-        // Request a list of airports - the "airportList" delegate method will be called when the list is ready
-        airportDatabase.listAirports()
+        // Create a new LLMapView, register as its delegate and add it as a subview
+        mapView = LLMapView()
+        mapView!.delegate = self
+        view.addSubview(mapView!)
+        
+        // Set the mapview's layout constraints
+        mapView!.translatesAutoresizingMaskIntoConstraints = false
+        mapView!.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        mapView!.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        mapView!.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        mapView!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        
+        airportDatabase.loadAirport("lax")
     }
     
     // MARK: Custom
@@ -74,15 +86,17 @@ class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelega
     }
 
     // MARK: Delegates - LLAirport
+    
     func airport(_ airport: LLAirport!, navigationPath: LLNavigationPath!, from startPosition: LLPosition!, toDestinations destinations: [Any]!) {
         
         drawRoute(waypoints: navigationPath.waypoints as! [LLWaypoint], startFloor: startPosition.floorId)
     }
     
     // MARK: Delegates - LLAirportDatabase
-    func airportDatabase(_ airportDatabase: LLAirportDatabase!, airportList: [Any]!) {
+    
+    func airportDatabase(_ airportDatabase: LLAirportDatabase!, airportLoadFailed venueId: String!, code errorCode: LLDownloaderError, message: String!) {
         
-        airportDatabase.loadAirport("lax")
+        // Handle failures here
     }
     
     // Implement the airportLoaded delegate method
@@ -100,28 +114,19 @@ class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelega
     }
 
     // MARK: Delegates - LLFloor
+    
     func floor(_ floor: LLFloor!, mapLoaded map: LLMap!) {
         
-        // Create a new LLMapView, set its map and add it as a subview
-        mapView = LLMapView()
-        
-        if mapView != nil {
-            
-            mapView!.map = map
-            view.addSubview(mapView!)
-            
-            mapView?.delegate = self
-            
-            // Set the mapview's layout constraints
-            mapView!.translatesAutoresizingMaskIntoConstraints = false
-            mapView!.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-            mapView!.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
-            mapView!.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-            mapView!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        }
+        mapView!.map = map
     }
     
     // MARK: Delegates - LLMapView
+    
+    func mapViewDidClickBack(_ mapView: LLMapView!) {
+        
+        // The user tapped the "Cancel" button while the map was loading. Dismiss the app or take other appropriate action here
+    }
+    
     func mapViewReady(_ mapView: LLMapView!) {
         
         // Pan/zoom the map after selecting lax-south-Departured

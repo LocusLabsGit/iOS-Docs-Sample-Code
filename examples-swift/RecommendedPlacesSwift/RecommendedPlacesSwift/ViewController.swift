@@ -26,9 +26,22 @@ class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelega
         
         LLConfiguration.shared().recommendedPlacesEnabled = true
         
-        // Get an instance of the LLAirportDatabase, register as its delegate and load the venue: LAX airport
+        // Get an instance of the LLAirportDatabase, register as its delegate and load the venue LAX
         airportDatabase = LLAirportDatabase()
         airportDatabase.delegate = self
+        
+        // Create a new LLMapView, register as its delegate and add it as a subview
+        mapView = LLMapView()
+        mapView!.delegate = self
+        view.addSubview(mapView!)
+        
+        // Set the mapview's layout constraints
+        mapView!.translatesAutoresizingMaskIntoConstraints = false
+        mapView!.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        mapView!.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        mapView!.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        mapView!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
+        
         airportDatabase.loadAirport("lax")
     }
     
@@ -56,6 +69,12 @@ class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelega
     }
     
     // MARK: Delegates - LLAirportDatabase
+    
+    func airportDatabase(_ airportDatabase: LLAirportDatabase!, airportLoadFailed venueId: String!, code errorCode: LLDownloaderError, message: String!) {
+        
+        // Handle failures here
+    }
+    
     func airportDatabase(_ airportDatabase: LLAirportDatabase!, airportLoaded airport: LLAirport!) {
         
         self.airport = airport
@@ -80,26 +99,20 @@ class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelega
     // MARK: Delegates - LLFloor
     func floor(_ floor: LLFloor!, mapLoaded map: LLMap!) {
         
-        // Create a new LLMapView, set its map and add it as a subview
-        mapView = LLMapView()
-        
-        if mapView != nil {
-            
-            mapView!.map = map
-            view.addSubview(mapView!)
-            
-            mapView?.delegate = self
-            
-            // Set the mapview's layout constraints
-            mapView!.translatesAutoresizingMaskIntoConstraints = false
-            mapView!.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-            mapView!.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
-            mapView!.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-            mapView!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        }
+        mapView?.map = map
     }
     
     // MARK: Delegates - LLMapView
+    func mapViewDidClickBack(_ mapView: LLMapView!) {
+        
+        // The user tapped the "Cancel" button while the map was loading. Dismiss the app or take other appropriate action here
+    }
+    
+    func mapViewReady(_ mapView: LLMapView!) {
+        
+        // The map is ready to be used in calls e.g. zooming, showing poi, etc.
+    }
+    
     func mapView(_ mapView: LLMapView!, willPresentPlaces places: [Any]!) -> [Any]! {
         
         // Show only 1 recommended place

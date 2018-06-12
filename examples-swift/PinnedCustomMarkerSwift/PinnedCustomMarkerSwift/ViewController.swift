@@ -26,21 +26,32 @@ class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelega
         // Initialize the LocusLabs SDK with the accountId provided by LocusLabs
         LLLocusLabs.setup().accountId = "A11F4Y6SZRXH4X"
         
-        // Get an instance of the LLAirportDatabase and register as its delegate
+        // Get an instance of the LLAirportDatabase, register as its delegate and load the venue LAX
         airportDatabase = LLAirportDatabase()
         airportDatabase.delegate = self
         
-        // Request a list of airports - the "airportList" delegate method will be called when the list is ready
-        airportDatabase.listAirports()
-    }
-
-    // MARK: Delegates - LLAirportDatabase
-    func airportDatabase(_ airportDatabase: LLAirportDatabase!, airportList: [Any]!) {
+        // Create a new LLMapView, register as its delegate and add it as a subview
+        mapView = LLMapView()
+        mapView!.delegate = self
+        view.addSubview(mapView!)
+        
+        // Set the mapview's layout constraints
+        mapView!.translatesAutoresizingMaskIntoConstraints = false
+        mapView!.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
+        mapView!.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
+        mapView!.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
+        mapView!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
         
         airportDatabase.loadAirport("lax")
     }
+
+    // MARK: Delegates - LLAirportDatabase
+   
+    func airportDatabase(_ airportDatabase: LLAirportDatabase!, airportLoadFailed venueId: String!, code errorCode: LLDownloaderError, message: String!) {
+        
+        // Handle failures here
+    }
     
-    // Implement the airportLoaded delegate method
     func airportDatabase(_ airportDatabase: LLAirportDatabase!, airportLoaded airport: LLAirport!) {
         
         self.airport = airport
@@ -63,28 +74,19 @@ class ViewController: UIViewController, LLAirportDatabaseDelegate, LLFloorDelega
     }
 
     // MARK: Delegates - LLFloor
+    
     func floor(_ floor: LLFloor!, mapLoaded map: LLMap!) {
         
-        // Create a new LLMapView, set its map and add it as a subview
-        mapView = LLMapView()
-        
-        if mapView != nil {
-            
-            mapView!.map = map
-            view.addSubview(mapView!)
-            
-            mapView!.delegate = self
-            
-            // Set the mapview's layout constraints
-            mapView!.translatesAutoresizingMaskIntoConstraints = false
-            mapView!.leftAnchor.constraint(equalTo: view.leftAnchor, constant: 0).isActive = true
-            mapView!.rightAnchor.constraint(equalTo: view.rightAnchor, constant: 0).isActive = true
-            mapView!.topAnchor.constraint(equalTo: view.topAnchor, constant: 0).isActive = true
-            mapView!.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: 0).isActive = true
-        }
+        mapView?.map = map
     }
     
     // MARK: Delegates - LLMapView
+    
+    func mapViewDidClickBack(_ mapView: LLMapView!) {
+        
+        // The user tapped the "Cancel" button while the map was loading. Dismiss the app or take other appropriate action here
+    }
+    
     func mapViewReady(_ mapView: LLMapView!) {
         
         // Get a reference to the POI database and set its delegate
