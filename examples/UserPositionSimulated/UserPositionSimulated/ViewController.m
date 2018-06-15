@@ -109,7 +109,6 @@
 
 #pragma mark Delegates - LLFloor
 
-
 - (void)floor:(LLFloor *)floor mapLoaded:(LLMap *)map {
     
     self.mapView.map = map;

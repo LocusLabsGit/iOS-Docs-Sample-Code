@@ -1,5 +1,5 @@
 # iOS-Docs-Sample-Code
-This repository contains the sample code referenced in the iOS Documentation
+This repository contains the sample code referenced in the iOS Documentation and covers both Objective-C and Swift.
 
 **SDK Version**  
 These samples all use Version 1.6+ of the iOS SDK.

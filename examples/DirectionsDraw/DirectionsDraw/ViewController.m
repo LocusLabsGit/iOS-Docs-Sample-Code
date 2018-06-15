@@ -14,7 +14,6 @@
 @property (nonatomic, strong) LLAirportDatabase *airportDatabase;
 @property (nonatomic, strong) LLFloor           *floor;
 @property (nonatomic, weak)   LLMapView         *mapView;
-@property (nonatomic, strong) LLNavPoint        *navPoint;
 
 - (LLCircle *)createCircleCenteredAt:(LLLatLng*)latLng onFloor:(NSString*)floorId withRadius:(NSNumber*)radius andColor:(UIColor*)color;
 - (void)drawRouteWithWaypoints:(NSArray *)waypoints startFloor:(NSString *)floorID;
